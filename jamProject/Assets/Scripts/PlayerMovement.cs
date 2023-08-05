@@ -27,11 +27,11 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Rotate(0, 0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
 
-        transform.position += (_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) - transform.position).normalized * speed * Time.deltaTime;
+        transform.position += (_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5)) - transform.position).normalized * speed * Time.deltaTime;
 
         if (timer <= 0)
         {
-            //Instantiate(line, spawn.position, spawn.rotation);
+            Instantiate(line, spawn.position, spawn.rotation);
             timer = 0.4f;
         }
 
