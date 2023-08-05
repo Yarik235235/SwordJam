@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Transform spawn;
     private Camera _camera;
-    public int speed = 3;
+    public int speed;
     public float rotationSpeed = 180f;
 
     public float offset;
@@ -31,9 +31,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (timer <= 0)
         {
-            Instantiate(line, spawn.position, spawn.rotation);
+            //Instantiate(line, spawn.position, spawn.rotation);
             timer = 0.4f;
         }
+
     }
 
 }
