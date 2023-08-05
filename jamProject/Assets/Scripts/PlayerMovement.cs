@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    public Transform spawn;
     private Camera _camera;
     public int speed = 3;
     public float rotationSpeed = 180f;
@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (timer <= 0)
         {
-            Instantiate(line, transform.position, transform.rotation);
+            Instantiate(line, spawn.position, spawn.rotation);
             timer = 0.4f;
         }
     }
