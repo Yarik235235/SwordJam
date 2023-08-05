@@ -8,8 +8,12 @@ public class PlayerMovement : MonoBehaviour
 
     private Camera _camera;
     public int speed = 3;
+    public float rotationSpeed = 180f;
 
     public float offset;
+
+    private float timer;
+    public GameObject line;
 
     private void Start()
     {
@@ -18,12 +22,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        timer -= Time.deltaTime;
+        float dist = Vector3.Distance(_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y)), transform.position);
 
-        Vector3 diference = _camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y) - transform.position);
-        float rotZ = Mathf.Atan2(diference.y, diference.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rotZ + offset);
+        transform.Rotate(0, 0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
 
-        transform.position += (_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5)) - transform.position).normalized * speed * Time.deltaTime;
+        transform.position += (_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) - transform.position).normalized * speed * Time.deltaTime;
+
+        if (timer <= 0)
+        {
+            Instantiate(line, transform.position, transform.rotation);
+            timer = 0.4f;
+        }
     }
 
 }

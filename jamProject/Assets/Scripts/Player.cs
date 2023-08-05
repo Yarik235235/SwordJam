@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float offset;
     public GameObject DottedLine;
 
+    private float timer = 0.1f;
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        timer -= Time.deltaTime;
         ControlRocket();
     }
 
@@ -31,7 +32,11 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.W))
         {
             rb.AddForce(transform.right * thrust);
-            InvokeRepeating("SpawnDottedLine", 2f,0);
+            if(timer <= 0)
+            {
+                Instantiate(DottedLine, transform.position, transform.rotation);
+                timer = 0.1f;
+            }
         }
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -MaxSpeed, MaxSpeed), Mathf.Clamp(rb.velocity.y, -MaxSpeed, MaxSpeed));
     }
@@ -44,10 +49,5 @@ public class Player : MonoBehaviour
         transform.eulerAngles = new Vector3(0, 180f, 0);
         rb.velocity = new Vector3(0f, 0f, 0f);
         rb.angularVelocity = new Vector3(0f, 0f, 0f);
-    }
-
-    public void SpawnDottedLine()
-    {
-        Instantiate(DottedLine, transform.position, transform.rotation);
     }
 }
