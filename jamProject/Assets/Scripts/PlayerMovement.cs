@@ -8,12 +8,11 @@ public class PlayerMovement : MonoBehaviour
     public Transform spawn;
     private Camera _camera;
     public int speed;
-    public float rotationSpeed = 180f;
+    public float rotationSpeed = 150f;
 
     public float offset;
 
     private float timer;
-    public GameObject line;
 
     private void Start()
     {
@@ -23,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         timer -= Time.deltaTime;
-        float dist = Vector3.Distance(_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y)), transform.position);
 
         transform.Rotate(0, 0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
 
@@ -31,10 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (timer <= 0)
         {
-            Instantiate(line, spawn.position, spawn.rotation);
             timer = 0.4f;
         }
-
     }
-
 }

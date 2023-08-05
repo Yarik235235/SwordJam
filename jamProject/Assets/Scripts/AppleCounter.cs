@@ -7,13 +7,19 @@ public class AppleCounter : MonoBehaviour
 {
     public int Applescounter = 0;
     public TMP_Text apples;
-    private void OnCollisionEnter(Collision collision)
+
+    public GameObject[] appleParent;
+    private void OnTriggerEnter(Collider other)
     {
-        if (gameObject.tag == "Apple")
+        if (other.gameObject.tag == "Apple")
         {
             Debug.Log("Apple");
-            apples.text = Applescounter.ToString();
-            Destroy(gameObject);
+            //apples.text = Applescounter.ToString();
+            foreach(GameObject apple in appleParent)
+            {
+                apple.GetComponent<Rigidbody>().isKinematic = false;
+                Destroy(apple, 3);
+            }
         }
     }
 }
