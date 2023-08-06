@@ -9,16 +9,24 @@ public class AppleCounter : MonoBehaviour
     public TMP_Text apples;
 
     public GameObject[] appleParent;
-    private void OnTriggerEnter(Collider other)
+
+    private void Update()
     {
-        if (other.gameObject.tag == "Apple")
+        Applescounter = PlayerPrefs.GetInt("Count");
+    }
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
         {
-            Debug.Log("Apple");
-            //apples.text = Applescounter.ToString();
+            Applescounter++;
+            PlayerPrefs.SetInt("Count", Applescounter);
+            apples.text = "Apples: " + Applescounter.ToString();
             foreach(GameObject apple in appleParent)
             {
                 apple.GetComponent<Rigidbody>().isKinematic = false;
+
                 Destroy(apple, 3);
+                Destroy(GetComponent<SphereCollider>());
             }
         }
     }

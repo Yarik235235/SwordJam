@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Transform spawn;
     private Camera _camera;
-    public int speed;
+    public float speed;
     public float rotationSpeed = 150f;
 
     public float offset;
@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Rotate(0, 0, Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
 
-        transform.position += (_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 5)) - transform.position).normalized * speed * Time.deltaTime;
+        transform.position += (_camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) - transform.position).normalized * speed * Time.deltaTime;
 
         if (timer <= 0)
         {
