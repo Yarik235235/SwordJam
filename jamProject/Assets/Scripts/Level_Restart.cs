@@ -18,6 +18,8 @@ public class Level_Restart : MonoBehaviour
 
     public Animator ImageAnim;
 
+    public GameObject[] heart;
+
     private void Start()
     {
         source = GetComponent<AudioSource>();
