@@ -5,10 +5,22 @@ using TMPro;
 
 public class AppleCounter : MonoBehaviour
 {
-    public int Applescounter = 0;
+    private int Applescounter = 0;
+    private int goldenCounter = 0;
+
+
     public TMP_Text apples;
 
     public GameObject[] appleParent;
+    public GameObject Particle;
+
+    public bool isGold;
+
+    private void Start()
+    {
+        PlayerPrefs.SetInt("Count", Applescounter);
+        PlayerPrefs.SetInt("CountGold", goldenCounter);
+    }
 
     private void Update()
     {
@@ -18,9 +30,19 @@ public class AppleCounter : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            Applescounter++;
-            PlayerPrefs.SetInt("Count", Applescounter);
-            apples.text = "Apples: " + Applescounter.ToString();
+            Instantiate(Particle, transform.position, transform.rotation);
+            if(isGold == true)
+            {
+                goldenCounter++;
+                PlayerPrefs.SetInt("CountGold", goldenCounter);
+            }
+            else
+            {
+                Applescounter++;
+                PlayerPrefs.SetInt("Count", Applescounter);
+                apples.text = "Apples: " + Applescounter.ToString();
+            }
+
             foreach(GameObject apple in appleParent)
             {
                 apple.GetComponent<Rigidbody>().isKinematic = false;

@@ -219,6 +219,7 @@ MonoBehaviour:
   - {fileID: 4937267072656344115}
   - {fileID: 2030853640426543601}
   - {fileID: 6060495452134159061}
+  Particle: {fileID: 48517275731009636, guid: 347ec4e3163168049a77f45b8f608ff6, type: 3}
 --- !u!54 &8075818202379630435
 Rigidbody:
   m_ObjectHideFlags: 0
